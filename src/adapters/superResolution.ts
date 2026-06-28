@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
 import cv, { Mat } from 'opencv-ts'
+import * as ort from 'onnxruntime-web'
 import { getCapabilities } from './util'
 import { ensureModel } from './cache'
 
@@ -112,9 +113,15 @@ async function tileProc(
           const yt = yp + tilePadding
           // const idx = (i * tileSize + x) + (j * tileSize + y) * imageW;
           // 主要转化到一维的坐标上，
-          tileData[xt + yt * tileSize + tileROffset] = data[idx + rOffset]
-          tileData[xt + yt * tileSize + tileGOffset] = data[idx + gOffset]
-          tileData[xt + yt * tileSize + tileBOffset] = data[idx + bOffset]
+          tileData[xt + yt * tileSize + tileROffset] = data[
+            idx + rOffset
+          ] as number
+          tileData[xt + yt * tileSize + tileGOffset] = data[
+            idx + gOffset
+          ] as number
+          tileData[xt + yt * tileSize + tileBOffset] = data[
+            idx + bOffset
+          ] as number
         }
       }
 
@@ -147,12 +154,15 @@ async function tileProc(
           const idx = xim + yim * outImageW
           const xt = x + tilePadding * 4
           const yt = y + tilePadding * 4
-          outputTensor.data[idx + outROffset] =
-            results.output.data[xt + yt * outTileSize + outTileROffset]
-          outputTensor.data[idx + outGOffset] =
-            results.output.data[xt + yt * outTileSize + outTileGOffset]
-          outputTensor.data[idx + outBOffset] =
-            results.output.data[xt + yt * outTileSize + outTileBOffset]
+          outputTensor.data[idx + outROffset] = results.output.data[
+            xt + yt * outTileSize + outTileROffset
+          ] as number
+          outputTensor.data[idx + outGOffset] = results.output.data[
+            xt + yt * outTileSize + outTileGOffset
+          ] as number
+          outputTensor.data[idx + outBOffset] = results.output.data[
+            xt + yt * outTileSize + outTileBOffset
+          ] as number
         }
       }
       currentTile++
@@ -170,7 +180,7 @@ async function tileProc(
 function processImage(
   img: HTMLImageElement,
   canvasId?: string
-): Promise<Uint8Array> {
+): Promise<Float32Array> {
   return new Promise((resolve, reject) => {
     try {
       const src = cv.imread(img)
@@ -243,12 +253,12 @@ function imageDataToDataURL(imageData: ImageData) {
 
   // 绘制 imageData 到 canvas
   const ctx = canvas.getContext('2d')
-  ctx.putImageData(imageData, 0, 0)
+  ctx?.putImageData(imageData, 0, 0)
 
   // 导出为数据 URL
   return canvas.toDataURL()
 }
-let model: ArrayBuffer | null = null
+let model: ort.InferenceSession | null = null
 export default async function superResolution(
   imageFile: File | HTMLImageElement,
   callback: (progress: number) => void
