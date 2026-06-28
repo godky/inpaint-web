@@ -1,8 +1,8 @@
 ![Inpaint-web](./media/cover.png)
+
 <div align="center">
   
 # Inpaint-web
-
 
 A free and open-source inpainting & image-upscaling tool powered by webgpu and wasm on the browser.
 
@@ -12,11 +12,11 @@ A free and open-source inpainting & image-upscaling tool powered by webgpu and w
 
 ## Inpaint（图片修复）
 
-https://github.com/lxfater/inpaint-web/assets/22794120/bcad4812-02ae-48bb-9e84-94dfeb7234f5
+https://github.com/godky/inpaint-web/assets/22794120/bcad4812-02ae-48bb-9e84-94dfeb7234f5
 
 ## Super-Resolution（图片高清化）
 
-https://github.com/lxfater/inpaint-web/assets/22794120/3a8d894f-9749-4685-b947-8b5f15c9cf38
+https://github.com/godky/inpaint-web/assets/22794120/3a8d894f-9749-4685-b947-8b5f15c9cf38
 
 ## Demo link
 
@@ -54,7 +54,7 @@ Demo link:https://inpaintweb.lxfater.com/
 
 ## Contributors
 
-<a href="https://github.com/lxfater/inpaint-web/graphs/contributors">
+<a href="https://github.com/godky/inpaint-web/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=lxfater/inpaint-web" />
 </a>
 
@@ -92,7 +92,6 @@ Model: https://github.com/Picsart-AI-Research/MI-GAN
 
 [![Star History Chart](https://api.star-history.com/svg?repos=lxfater/inpaint-web&type=Date)](https://star-history.com/#lxfater/inpaint-web&Date)
 
-
 ## Other Projects by the Author (作者的其他项目)
 
 ### 中文
@@ -108,4 +107,3 @@ Check out my other projects:
 
 - [Demoget](https://www.demoget.com/en): Free screen recording software with auto-zoom and mouse trajectory optimization.
 - [tinyeraser](https://www.tinyeraser.com/en): Free, batch, fast, one-click background replacement.
-
